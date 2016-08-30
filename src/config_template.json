@@ -3,9 +3,9 @@
 	"bodyLimit": "100kb",
 	"corsHeaders": ["Link"],
   "db": {
-		"host": "localhost",
-		"user": "root",
-		"password": "root",
-		"database": "rjGymApp"	
+		"host": "",
+		"user": "",
+		"password": "",
+		"database": ""	
 	}
 }

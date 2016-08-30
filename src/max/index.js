@@ -6,7 +6,7 @@ export default ({ config, db }) => {
 	let api = Router();
 
 	// mount the facets resource
-	api.use('/', facets({ config, db }));
+	api.use('/:userHash', facets({ config, db }));
 
 	return api;
 }
