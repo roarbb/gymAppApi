@@ -5,16 +5,16 @@ import User from '../models/user'
 export default ({ config, db }) => resource({
 
 	/** Property name to store preloaded entity on `request`. */
-	id : 'facet',
+	id : 'user',
 
 	/** For requests with an `id`, you can auto-load the entity.
 	 *  Errors terminate the request, success sets `req[id] = data`.
 	 */
-	load(req, id, callback) {
-		let facet = facets.find( facet => facet.id===id ),
-			err = facet ? null : 'Not found';
-		callback(err, facet);
-	},
+	// load(req, id, callback) {
+	// 	let facet = facets.find( facet => facet.id===id ),
+	// 		err = facet ? null : 'Not found';
+	// 	callback(err, facet);
+	// },
 
 	/** GET / - List all entities */
 	index({ params }, res) {
@@ -31,8 +31,10 @@ export default ({ config, db }) => resource({
 	},
 
 	/** GET /:id - Return a given entity */
-	read({ facet }, res) {
-		res.json(facet);
+	read({ params }, res) {
+		User.getById(db, params.user)
+			.then(userData => res.json(userData))
+			.catch(err => res.json(err))
 	},
 
 	/** PUT /:id - Update a given entity */

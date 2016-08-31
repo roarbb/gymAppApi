@@ -3,10 +3,10 @@ import { Router } from 'express';
 import facets from './facets';
 
 export default ({ config, db }) => {
-	let api = Router();
+	let userApi = Router();
 
 	// mount the facets resource
-	api.use('/', facets({ config, db }));
+	userApi.use('/', facets({ config, db }));
 
-	return api;
+	return userApi;
 }

@@ -8,6 +8,7 @@ import config from './config.json'
 
 import aboutApi from './about'
 import maxApi from './max'
+import userApi from './user'
 
 let app = express()
 app.server = http.createServer(app)
@@ -29,6 +30,7 @@ initializeDb( db => {
 
 	app.use('/', aboutApi())
 	app.use('/max', maxApi({config, db}))
+	app.use('/user', userApi({config, db}))
 
 	app.server.listen(process.env.PORT || config.port)
 

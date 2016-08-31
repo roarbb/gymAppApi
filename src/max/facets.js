@@ -21,8 +21,8 @@ export default ({ config, db }) => resource({
 	/** GET / - List all entities */
 	index(req, res) {
 		MaxRepsModel.getAll(db, req.params.userHash)
-			  .then(response => res.json(response))
-				.catch(error => res.json(error))
+		  .then(response => res.json(response))
+			.catch(error => res.json(error))
 	},
 
 	/** POST / - Create a new entity */
