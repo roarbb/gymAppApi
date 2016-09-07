@@ -9,7 +9,7 @@ const MaxRepsModel = {
         WHERE u.hash = "${userHash}"`
 
        db.query(sql, (err, rows) => {
-        if (err) reject(err);
+        if (err) reject(err)
         resolve(rows)
       });
     });
