@@ -32,7 +32,7 @@ export default ({ config, db }) => resource({
 
 	/** GET /:id - Return a given entity */
 	read({ params }, res) {
-		User.getById(db, params.user)
+		User.getByAesHash(db, params.user)
 			.then(userData => res.json(userData))
 			.catch(err => res.json(err))
 	},

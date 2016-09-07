@@ -18,3 +18,12 @@ export function toRes(res, status=200) {
 		res.status(status).json(thing);
 	};
 }
+
+export function decrypt(string) {
+	const CryptoJS = require("crypto-js")
+	const date = new Date
+	const msg = `${date.getDay()}${date.getDay()}${date.getHours()}${date.getFullYear()}`
+  const bytes  = CryptoJS.AES.decrypt(string.toString(), msg.toString())
+
+  return bytes.toString(CryptoJS.enc.Utf8)
+}

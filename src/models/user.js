@@ -1,3 +1,5 @@
+import {decrypt} from '../lib/util'
+
 const User = {
 
   getAll(db) {
@@ -11,9 +13,9 @@ const User = {
     });
   },
 
-  getById(db, id) {
+  getByAesHash(db, id) {
     return new Promise((resolve, reject) => {
-      const sql = `SELECT * FROM user WHERE email = '${id}'`
+      const sql = `SELECT * FROM user WHERE email = '${decrypt(id)}'`
        db.query(sql, (err, rows) => {
         if (err) reject(err)
 
