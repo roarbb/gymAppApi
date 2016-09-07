@@ -27,3 +27,12 @@ export function decrypt(string) {
 
   return bytes.toString(CryptoJS.enc.Utf8)
 }
+
+export function generateRandomHash() {
+	const CryptoJS = require("crypto-js")
+
+	const current_date = (new Date()).valueOf().toString()
+	const random = Math.random().toString()
+
+	return CryptoJS.SHA1(current_date + random).toString(CryptoJS.enc.Hex)
+}
