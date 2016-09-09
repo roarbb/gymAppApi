@@ -19,14 +19,14 @@ const User = {
       const sql = `SELECT * FROM user WHERE email = '${email}' LIMIT 1`
 
       db.query(sql, (err, rows) => {
-      if (err) reject(err)
+        if (err) reject(err)
 
-      if (rows.length === 0) {
-        resolve(this.createNewUser(db, email))
-        return true
-      }
+        if (rows.length === 0) {
+          resolve(this.createNewUser(db, email))
+          return true
+        }
 
-      resolve(rows[0])
+        resolve(rows[0])
       });
     });
   },
