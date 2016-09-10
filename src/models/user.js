@@ -45,8 +45,24 @@ const User = {
           hash
         })
       })
-
     })
+  },
+
+  getByHash(db, hash) {
+    return new Promise((resolve, reject) => {
+      const sql = `SELECT * FROM user WHERE hash = '${hash}'`
+
+      db.query(sql, (err, rows) => {
+        if (err) reject(err)
+
+        if (rows.length === 0) {
+          reject('User not found.')
+          return true
+        }
+
+        resolve(rows[0])
+      });
+    });
   }
 
 }

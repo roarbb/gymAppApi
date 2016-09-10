@@ -27,9 +27,9 @@ export default ({ config, db }) => resource({
 
 	/** POST / - Create a new entity */
 	create({ body }, res) {
-		body.id = facets.length.toString(36);
-		facets.push(body);
-		res.json(body);
+		MaxRepsModel.insert(db, body)
+		.then(response => res.json(response))
+		.catch(error => res.json(error))
 	},
 
 	/** GET /:id - Return a given entity */

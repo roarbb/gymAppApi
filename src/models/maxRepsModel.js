@@ -1,3 +1,5 @@
+import User from './user'
+
 const MaxRepsModel = {
 
   getAll(db, userHash) {
@@ -11,10 +13,32 @@ const MaxRepsModel = {
        db.query(sql, (err, rows) => {
         if (err) reject(err)
         resolve(rows)
-      });
-    });
+      })
+    })
+  },
+
+  insert(db, body) {
+    return new Promise((resolve, reject) => {
+      const {userHash, name, weight} = body
+
+      User.getByHash(db, userHash)
+        .then(userData => {
+
+          const insertData = {
+            user_id: userData.id,
+            discipline: name,
+            max: weight
+          }
+
+          db.query('INSERT INTO max_reps SET ?', insertData, (err, result) => {
+            if (err) reject(err)
+
+            resolve(result.insertId)
+          })
+        })
+    })
   }
 
 }
 
-export default MaxRepsModel;
+export default MaxRepsModel
