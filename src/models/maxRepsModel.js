@@ -37,6 +37,25 @@ const MaxRepsModel = {
           })
         })
     })
+  },
+
+  update(db, body) {
+    return new Promise((resolve, reject) => {
+      const {maxId, userHash, name, weight} = body
+
+      User.getByHash(db, userHash)
+        .then(userData => {
+
+          db.query(
+            'UPDATE max_reps SET ? WHERE ? AND ?',
+            [{discipline: name, max: weight}, {id: maxId}, {user_id: userData.id}],
+            (err, result) => {
+              if (err) reject(err)
+
+              resolve(result)
+            })
+        })
+    })
   }
 
 }

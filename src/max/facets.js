@@ -39,12 +39,9 @@ export default ({ config, db }) => resource({
 
 	/** PUT /:id - Update a given entity */
 	update({ facet, body }, res) {
-		for (let key in body) {
-			if (key!=='id') {
-				facet[key] = body[key];
-			}
-		}
-		res.sendStatus(204);
+		MaxRepsModel.update(db, body)
+		.then(response => res.sendStatus(204))
+		.catch(error => res.json(error))
 	},
 
 	/** DELETE /:id - Delete a given entity */
