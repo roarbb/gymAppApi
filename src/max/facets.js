@@ -28,8 +28,8 @@ export default ({ config, db }) => resource({
 	/** POST / - Create a new entity */
 	create({ body }, res) {
 		MaxRepsModel.insert(db, body)
-		.then(response => res.json(response))
-		.catch(error => res.json(error))
+			.then(response => res.json(response))
+			.catch(error => res.json(error))
 	},
 
 	/** GET /:id - Return a given entity */
@@ -40,13 +40,14 @@ export default ({ config, db }) => resource({
 	/** PUT /:id - Update a given entity */
 	update({ facet, body }, res) {
 		MaxRepsModel.update(db, body)
-		.then(response => res.sendStatus(204))
-		.catch(error => res.json(error))
+			.then(response => res.sendStatus(204))
+			.catch(error => res.json(error))
 	},
 
 	/** DELETE /:id - Delete a given entity */
-	delete({ facet }, res) {
-		facets.splice(facets.indexOf(facet), 1);
-		res.sendStatus(204);
+	delete({ body }, res) {
+		MaxRepsModel.delete(db, body)
+			.then(response => res.sendStatus(204))
+			.catch(error => res.json(error))
 	}
-});
+})

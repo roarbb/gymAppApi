@@ -56,6 +56,25 @@ const MaxRepsModel = {
             })
         })
     })
+  },
+
+  delete(db, body) {
+    return new Promise((resolve, reject) => {
+      const {maxId, userHash} = body
+
+      User.getByHash(db, userHash)
+        .then(userData => {
+
+          db.query(
+            'DELETE FROM max_reps WHERE ? AND ?',
+            [{id: maxId}, {user_id: userData.id}],
+            (err, result) => {
+              if (err) reject(err)
+
+              resolve(result)
+            })
+        })
+    })
   }
 
 }
